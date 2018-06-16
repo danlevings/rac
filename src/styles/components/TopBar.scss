@@ -1,0 +1,32 @@
+@import '../variables.scss';
+
+.top-bar {
+    background: white;
+
+    ul {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: flex-end;
+        list-style: none;
+
+        li {
+            padding: 16px;
+            position: relative;
+            font-size: 14px;
+
+            &:not(:last-child):after {
+                content: '';
+                display: inline-block;
+                width: 1px;
+                height: 10px;
+                position: absolute;
+                right: 0;
+                background: $dark;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+    }
+}

@@ -1,0 +1,514 @@
+@import './variables.scss';
+
+// Components
+@import './components/TopBar.scss';
+@import './components/Footer.scss';
+@import './components/Hero.scss';
+@import './components/Button.scss';
+
+* {
+    font-family: $fontSecondary;
+    box-sizing: border-box;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+h3 {
+    font-family: $fontPrimary;
+    font-weight: normal;
+    font-size: 24px;
+}
+
+.image-section {
+    text-align: center;
+    padding: 64px;
+    h2 {
+        font-size: 36px;
+        margin: 0;
+        margin-bottom: 16px;
+        color: white;
+        font-weight: normal;
+        font-family: $fontPrimary;
+    }
+}
+
+.wrapper {
+    width: 920px;
+    margin: 0 auto;
+}
+
+
+.product {
+    width: 100%;
+    min-height: 350px;
+    margin-bottom: 32px;
+    
+    .product-title, .product-price {
+        font-family: $fontPrimary;
+        color: $dark;
+        font-size: 14px;
+        width: 100%;
+        display: inline-block;
+        padding-left: 8px;
+        height: 34px;
+    }
+
+    .product-price {
+        color: #999999;
+    }
+}
+.product-image {
+    width: 100%;
+    position: relative;
+    img {
+        border: 8px solid $light;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .product-image-tag {
+        position: absolute;
+        bottom: 8px;
+        left: 12px;
+        background: $secondary;
+        color: white;
+        text-transform: uppercase;
+        padding: 4px 8px;
+        font-weight: 600;
+        font-size: 12px;
+    }
+
+    margin-bottom: 8px;
+}
+
+.nav-bar {
+    width: 100%;
+    height: 100px;
+    padding: 16px 60px;
+    display: flex;
+    justify-content: space-between;
+    background: $coloredDark;
+    color: white;
+    h1 {
+        margin: 0;
+        padding: 0;
+        font-family: $fontPrimary;
+        font-weight: 400;
+        margin-top: 8px;
+        text-align: left;
+    }
+
+    .subtitle {
+        font-style: italic;
+        opacity: .6;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        li {
+            margin: auto 0;
+            display: inline-block;
+            padding-left: 60px;
+            font-size: 18px;
+            opacity: .7;
+            transition: .3s opacity;
+            &.active, &:hover {
+                opacity: 1;
+            } 
+        }
+    }
+}
+
+.breadcrumbs {
+    background: $light;
+    padding: 16px 60px;
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        li {
+            display: inline-block;
+            padding-right: 32px;
+            color: $coloredDark;
+            &:not(:last-child):after {
+                content: '/';
+                padding-left: 32px;
+            }
+        }
+    }
+}
+
+.shop-products {
+    width: 100%;
+    padding: 92px 60px 32px 360px;
+    column-count: 4;
+    column-gap: 20px;
+    position: relative;
+    .shop-title {
+        top: 8px;
+        font-family: $fontPrimary;
+        position: absolute;
+        font-size: 24px;
+        font-weight: normal;
+    }
+}
+
+.shop-filters {
+    position: absolute;
+    left: 60px;
+    z-index: 99;
+    h4 {
+        font-family: $fontPrimary;
+        font-weight: normal;
+        font-size: 18px;
+    }
+    .filter-checkbox {
+        padding: 8px 0;
+    }
+}
+
+input[type=checkbox] {
+    position: absolute; // take it out of document flow
+    opacity: 0; // hide it
+  
+    & + label {
+      position: relative;
+      cursor: pointer;
+      padding: 0;
+    }
+  
+    // Box.
+    & + label:before {
+      content: '';
+      margin-right: 20px;
+      margin-top: 4px;
+      display: inline-block;
+      vertical-align: text-top;
+      width: 14px;
+      height: 14px;
+      background: white;
+    }
+  
+    // Box hover
+    &:hover + label:before {
+      background: #FFD6CA;
+    }
+    
+    // Box focus
+    & + label:before {
+      box-shadow: 0 0 0 1px #B3B3B3;
+    }
+  
+    // Box checked
+    &:checked + label:before {
+      background: #f35429;
+      box-shadow: 0 0 0 1px #f35429;
+    }
+    
+    // Disabled state label.
+    &:disabled + label {
+      color: #b8b8b8;
+      cursor: auto;
+    }
+  
+    // Disabled box.
+    &:disabled + label:before {
+      box-shadow: none;
+      background: #ddd;
+    }
+  
+    // Checkmark. Could be replaced with an image
+    &:checked + label:after {
+      content: '';
+      position: absolute;
+      left: 2px;
+      top: 10px;
+      background: white;
+      width: 2px;
+      height: 2px;
+      box-shadow: 
+        2px 0 0 white,
+        4px 0 0 white,
+        4px -2px 0 white,
+        4px -4px 0 white,
+        4px -6px 0 white,
+        4px -8px 0 white;
+      transform: rotate(45deg);
+    }
+  }
+
+.contact-grid {
+    display: flex;
+    justify-content: space-between;
+    padding: 60px;
+
+    > div {
+        width: 45%;
+    }
+
+    .contact-piece {
+        display: flex;
+        margin-bottom: 32px;
+
+        .contact-icon {
+            width: 40%;
+            text-align: center;
+            font-size: 72px;
+            color: $secondary;
+            text-align: center;
+        }
+        .contact-piece-content {
+            width: 50%;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            justify-content: center;
+            span:first-child {
+                font-family: $fontPrimary;
+                display: inline-block;
+                width: 100%;
+                font-size: 14px;
+                padding-bottom: 8px;
+                font-style: italic;
+            }
+        }
+    }
+
+    .contact-form {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: center;
+        input, textarea {
+            width: 100%;
+            margin-bottom: 16px;
+            padding: 16px 32px;
+        }
+        button {
+            border-radius: 500px;
+            width: 120px;
+            align-self: flex-end;
+            padding: 8px 32px;
+            color: white;
+            background: $secondary;
+            border: none;
+            outline: none;
+            font-size: 18px;
+            float: right;
+        }
+    }
+}
+
+input[type=text], textarea {
+border-radius: 4px;
+border: 1px solid $secondary;
+padding: 8px 16px;
+}
+
+.map {
+    width: 100%;
+    height: 400px;
+}
+
+.basket-popup {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    border: 4px solid $light;
+    border-radius: 4px;
+    z-index: 999;
+    background: white;
+    color: $dark;
+    padding: 32px;
+    h3 {
+        margin: 0;
+        padding-bottom: 32px;
+    }
+    img {
+        width: 75px;
+    }
+    span {
+        font-family: $fontPrimary;
+        padding-bottom: 16px;
+    }
+    tr {
+        margin-bottom: 16px;
+        td {
+            padding-bottom: 32px;
+            padding-right: 16px;
+        }
+    }
+    .basket-title {
+        padding-left: 8px;
+        a {
+            font-family: $fontPrimary;
+            opacity: .7;
+            padding-top: 4px;
+            display: inline-block;
+        }
+    }
+
+    .basket-total {
+        font-size: 21px;
+        text-align: right;
+        margin-top: 16px;
+        padding: 16px 0;
+        border-top: 1px solid #CCCCCC;
+    }
+
+    .checkout-button {
+        float: right;
+    }
+}
+
+.checkout-grid {
+    display: flex;
+    justify-content: space-between;
+
+    > div {
+        width: 45%;
+    }
+
+}
+
+.checkout-page {
+    padding-bottom: 60px;
+    h2, h3 {
+        font-family: $fontPrimary;
+        font-weight: normal;
+        padding-top: 16px;
+        font-size: 32px;
+    }
+
+    h3 {
+        font-size: 21px;
+        width: 100%;
+        padding-top: 0;
+    }
+    .logged-in-as {
+        font-family: $fontPrimary;
+        top: -22px;
+        position: relative;
+    }
+
+    .checkout-form {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .form-group {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 8px;
+        label {
+            font-size: 14px;
+            padding-bottom: 8px;
+        }
+        input {
+            padding: 12px 24px;
+            margin-bottom: 16px;
+        }
+
+        &.half {
+            width: 50%;
+        }
+
+    }
+    .filter-checkbox {
+        font-size: 14px;
+        margin-bottom: 24px;
+    }
+
+    .checkout-summary {
+        .summary {
+            background: $light;
+            border: 1px solid #CCCCCC;
+            border-radius: 4px;
+            padding: 24px;
+
+            h3 {
+                margin: 0;
+                padding-bottom: 32px;
+            }
+            span {
+                font-family: $fontPrimary;
+            }
+
+            td {
+                padding-right: 16px;
+                padding-bottom: 24px;
+            }
+
+            .price span {
+                opacity: .5;
+            }
+        }
+
+        .delivery {
+            border-top: 1px solid $dark;
+        }
+    }
+}
+
+.product-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-wrap: wrap;
+    background: $light;
+    border: 2px solid darken($light, .2);
+    border-radius: 4px;
+    padding: 12px 24px;
+    width: 700px;
+    z-index: 100;
+    h2 {
+        width: 100%;
+        font-weight: normal;
+        font-family: $fontPrimary;
+    }
+
+    span {
+        display: block;
+        width: 100%;
+        padding-bottom: 16px;
+    }
+
+    .left {
+        width: 50%;
+        max-width: 200px;
+        padding-right: 32px;
+    }
+    .right {
+        width: 50%;
+        flex-grow: 1;
+        padding-bottom: 32px;
+    }
+
+    .cross {
+        position: absolute;
+        top: 12px;
+        right: 24px;
+        font-family: $fontPrimary;
+        font-size: 32px;
+        opacity: .6;
+    }
+}
+
+.underlay {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .4);
+    z-index: 99;
+}

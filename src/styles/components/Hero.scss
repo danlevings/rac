@@ -1,0 +1,101 @@
+@import '../variables.scss';
+
+.hero {
+    height: 650px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    color: white;
+
+    .hero-content-image, .hero-content-inner {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 0;
+
+        img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+        }
+    }
+
+    .hero-content-inner {
+        z-index: 1;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+
+        .center {
+            margin: auto;
+        }
+        h2, p, a {
+            margin: auto;
+        }
+        h2 {
+            font-family: $fontPrimary;
+            font-size: 36px;
+            font-weight: 400;
+            margin-bottom: 16px;
+        }
+        p {
+            font-style: italic;
+            font-size: 18px;
+            opacity: .7;
+            line-height: 1.75;
+            width: 600px;
+        }
+
+        .button {
+            margin-top: 16px;
+        }
+    }
+
+    nav {
+        width: 100%;
+        height: 100px;
+        padding: 16px 60px;
+        display: flex;
+        justify-content: space-between;   
+        h1 {
+            margin: 0;
+            padding: 0;
+            font-family: $fontPrimary;
+            font-weight: 400;
+            margin-top: 8px;
+            text-align: left;
+        }
+
+        .subtitle {
+            font-style: italic;
+            opacity: .6;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            li {
+                margin: auto 0;
+                display: inline-block;
+                padding-left: 60px;
+                font-size: 18px;
+                opacity: .7;
+                transition: .3s opacity;
+                &.active, &:hover {
+                    opacity: 1;
+                } 
+            }
+        }
+    }
+
+}

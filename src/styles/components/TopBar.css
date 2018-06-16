@@ -1,0 +1,22 @@
+.top-bar {
+  background: white; }
+  .top-bar ul {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+    list-style: none; }
+    .top-bar ul li {
+      padding: 16px;
+      position: relative; }
+      .top-bar ul li:not(:last-child):after {
+        content: '';
+        display: inline-block;
+        width: 1px;
+        height: 10px;
+        position: absolute;
+        right: 0;
+        background: #1A1A1A;
+        top: 50%;
+        transform: translateY(-50%); }

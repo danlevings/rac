@@ -1,0 +1,28 @@
+@import '../variables.scss';
+
+.button {
+    background: $primary;
+    border-radius: 500px;
+    padding: 16px 32px;
+    font-weight: bold;
+    display: inline-block;
+    color: white;
+    border: none;
+}
+
+.add-to-cart-button {
+    color: $primary;
+    border: none;
+    border-radius: 500px;
+    outline: none;
+    background: transparent;
+    font-size: 14px;
+    padding: 4px 12px;
+    i {
+        padding-right: 8px;
+    }
+    &:hover, &.active {
+        background: $primary;
+        color: white;
+    }
+}
