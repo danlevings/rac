@@ -1,0 +1,1 @@
+export const API_URL = 'http://ec2-54-93-35-40.eu-central-1.compute.amazonaws.com/api/public/api';

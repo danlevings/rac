@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { API_URL } from './utils';
 import fireplace1 from '../../assets/fireplace-1.png';
 import fireplace2 from '../../assets/fireplace-2.png';
 import fireplace3 from '../../assets/fireplace-3.png';
@@ -6,65 +7,6 @@ import fireplace4 from '../../assets/fireplace-4.png';
 
 export const GET_PRODUCTS_REQUEST = 'basket/GET_PRODUCTS_REQUEST'
 export const GET_PRODUCTS = 'basket/GET_PRODUCTS'
-
-const dummyProducts = [
-  {
-    id: 0,
-    image: fireplace1,
-    tag: 'new',
-    title: 'Rustic 18th Century Metal Fireplace',
-    price: 50000,
-  },
-  {
-    id: 1,
-    image: fireplace2,
-    tag: '',
-    title: 'Windsor Small Victorian Style Gas Insert',
-    price: 50000,
-  },
-  {
-    id: 2,
-    image: fireplace3,
-    tag: '',
-    title: '19th Century Modernized Bohemian Fireplace',
-    price: 50000,
-  },
-  {
-    id: 3,
-    image: fireplace4,
-    tag: '',
-    title: 'Belfast Cast Iron ',
-    price: 50000,
-  },
-  {
-    id: 4,
-    image: fireplace1,
-    tag: 'new',
-    title: 'Rustic 18th Century Metal Fireplace',
-    price: 50000,
-  },
-  {
-    id: 5,
-    image: fireplace2,
-    tag: '',
-    title: 'Windsor Small Victorian Style Gas Insert',
-    price: 50000,
-  },
-  {
-    id: 6,
-    image: fireplace3,
-    tag: '',
-    title: '19th Century Modernized Bohemian Fireplace',
-    price: 50000,
-  },
-  {
-    id: 7,
-    image: fireplace4,
-    tag: '',
-    title: 'Belfast Cast Iron ',
-    price: 50000,
-  }
-]
 
 const initialState = {
   products: {}, // Product ids only
@@ -102,14 +44,16 @@ export const getProducts = () => {
     dispatch({
       type: GET_PRODUCTS_REQUEST
     })
-    return axios.get('http://localhost:8000/api/products').then(result => {
+    return axios.get(`${API_URL}/products`).then(result => {
       console.log(result.data);
       const products = result.data.map(p => ({
         description: p.description,
         id: p.id,
         name: p.name,
         price: p.price,
-        images: p.product_images.map(pi => `http://localhost:8000/images/${pi.image}`),
+        description: p.description,
+        shippingPrice: p.shippingPrice,
+        images: p.images.map(pi => `http://ec2-54-93-35-40.eu-central-1.compute.amazonaws.com/api/public/images/${pi.image}`),
         tags: p.tags.map(t => ({
           name: t.name,
           type: t.type,

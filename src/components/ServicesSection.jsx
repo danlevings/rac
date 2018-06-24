@@ -36,7 +36,9 @@ export default class TopBar extends Component {
     return (
         <section className='wrapper' style={{ textAlign: 'center', padding: 42 }}>
         <h3>Our Services</h3>
-        <div className="services" style={{ columnCount: 4, columnGap: 20, textAlign: 'left' }} >
+        <div className="services" style={{ 
+            display: 'flex',
+            flexWrap: 'wrap', }}  >
         {this.state.services.map(service => 
           <Product
             key={service.id}

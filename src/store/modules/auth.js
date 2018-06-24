@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { API_URL } from './utils';
 import { MERGE_CART_CONTENTS } from './basket';
 
 export const LOGIN_REQUEST = 'auth/REQUEST_LOGIN';
@@ -103,7 +104,7 @@ export const login = (email, password) => {
     dispatch({
       type: LOGIN_REQUEST,
     });
-    return axios.post('http://localhost:8000/api/login', { email, password }).then(result => {
+    return axios.post(`${API_URL}/login`, { email, password }).then(result => {
       console.log(result);
       if (typeof result.data.user === 'undefined') {
         dispatch({
@@ -131,7 +132,7 @@ export const register = (firstName, lastName, email, password) => {
     dispatch({
       type: REGISTER_REQUEST,
     });
-    return axios.post('http://localhost:8000/api/register', { firstName, lastName, email, password }).then(result => {
+    return axios.post(`${API_URL}/register`, { firstName, lastName, email, password }).then(result => {
       if (typeof result.data.user === 'undefined') {
         dispatch({
           type: REGISTER_FAILURE,
@@ -154,7 +155,7 @@ export const checkAuth = () => {
     if (typeof USER_TOKEN === 'undefined') {
       return;
     }
-    return axios.post('http://localhost:8000/api/user', { token: USER_TOKEN }).then(result => {
+    return axios.post(`${API_URL}/user`, { token: USER_TOKEN }).then(result => {
       if (typeof result.data.user === 'undefined') {
         localStorage.removeItem('USER_TOKEN');
         dispatch({
@@ -183,6 +184,6 @@ export const logout = () => {
     dispatch({
       type: LOGOUT,
     });
-    return axios.post('http://localhost:8000/api/logout', { token: USER_TOKEN });
+    return axios.post(`${API_URL}/logout`, { token: USER_TOKEN });
   }
 }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import BasketPopup from './BasketPopup';
 import LoginRegisterModal from './LoginRegisterModal';
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 
 import { connect } from 'react-redux'
 import { checkAuth, logout } from '../store/modules/auth'
@@ -15,6 +15,7 @@ class TopBar extends Component {
   state = {
     isBasketOpen: false,
     isLoginRegisterModalOpen: false,
+    isLoginDropdownOpen: false,
   }
     
   componentDidMount = () => {
@@ -38,6 +39,7 @@ class TopBar extends Component {
       });
     } else {
       this.props.logout();
+      this.props.history.push('/');
     }
   }
 
@@ -54,12 +56,25 @@ class TopBar extends Component {
     })
   }
 
+  renderLoginText = () => {
+    if (this.props.authorized) {
+      return <li className="topbar-dropdown-hover">
+        <div>Welcome, <span style={{ textTransform: 'capitalize' }}>{this.props.user.firstName}</span>! <i className="fa fa-user" /></div>
+        <div className="topbar-dropdown">
+          <Link to="/orders">Your orders</Link>
+          <span onClick={this.toggleLoginRegister}>Logout</span>
+        </div>
+      </li>
+    }
+    return <li onClick={this.toggleLoginRegister}>Sign in or register <i className="fa fa-user" /></li>
+  }
+
   render() {
     const { authorized, user } = this.props;
     return (
       <div className="top-bar">
         <ul>
-            <li onClick={this.toggleLoginRegister}>{authorized ? `Hello, ${user.firstName}!` : 'Sign in or register'} <i className="fa fa-user"></i></li>
+            {this.renderLoginText()}
             <li>EN</li>
             <li onClick={this.toggleBasket}><i className="fa fa-shopping-cart"></i> ({this.props.basket.length})</li>
         </ul>

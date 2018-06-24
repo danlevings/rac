@@ -10,11 +10,13 @@ export default class Product extends Component {
     price: PropTypes.number,
     description: PropTypes.string,
     onAddToCart: PropTypes.func,
+    shippingPrice: PropTypes.number,
   }
 
   state = {
     isProductModalOpen: false,
     hasBeenAdded: false,
+    shippingPrice: 0,
   }
 
   onProductClick = () => {
@@ -63,7 +65,7 @@ export default class Product extends Component {
   }
 
   render() {
-    const { style, image, tag, title, price, description, shipping, onAddToCart } = this.props;
+    const { style, image, tag, title, price, description, shippingPrice, onAddToCart } = this.props;
     const { isProductModalOpen, hasBeenAdded } = this.state;
     return [
       <div key={title} className={`product`} style={{...style, cursor: 'pointer'}} onClick={this.onProductClick}>
@@ -80,7 +82,7 @@ export default class Product extends Component {
       isProductModalOpen && <div className="underlay" />,
       isProductModalOpen && (<div className="product-modal">
           <h2>{title}</h2>
-          <span className="product-price">${price} {shipping && `(+${shipping} shipping)`}</span>
+        <span className="product-price">${price} {shippingPrice !== 0 && <span style={{ fontSize: 12, opacity: 0.8 }}>(+${shippingPrice} shipping)</span>}</span>
           <div className="left">
             <div className="product-image">
                 <img src={image} alt={title}/>
@@ -89,13 +91,7 @@ export default class Product extends Component {
             {this.renderButton()}
           </div>
           <div className="right">
-          The fireplace was a necessity in early America. As the hub of the house, a burning hearth provided heat, housed multiple fires for cooking and baking, and served as the nucleus of family gatherings.
-          <br />
-          <br />
-          In the 1600s and early 1700s, the typical fireplace was a walk-in: a wide, deep, open recess, generally with only the briefest semblance of a mantel, or no mantel at all. The firebox was usually wider than it was tall, especially in the homes of Dutch settlers.
-          <br />
-          <br />
-          Fireplaces in English homes were smaller and more efficient. In New England and the Mid-Atlantic, colonial homes had central chimneys with multiple flues so that fires could be lit in two or more rooms on each floor. 
+            {description}
           </div>
           <div className="cross" onClick={this.onCloseModal} style={{ cursor: 'pointer' }}>x</div>
       </div>)

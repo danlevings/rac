@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { API_URL } from './utils';
+import { CHECK_AUTH_SUCCESS } from './auth';
 
 export const SYNC_CART_CONTENTS_REQUEST = 'basket/SYNC_CART_CONTENTS_REQUEST'
 export const SYNC_CART_CONTENTS = 'basket/SYNC_CART_CONTENTS'
@@ -89,7 +91,7 @@ export const syncCartContents = (productIds = null) => {
     const USER_TOKEN = localStorage.getItem('USER_TOKEN');
 
     if (productIds) {
-      return axios.post('http://localhost:8000/api/basket', { token: USER_TOKEN, productIds }).then(result => {
+      return axios.post(`${API_URL}/basket`, { token: USER_TOKEN, productIds }).then(result => {
         dispatch({
           type: SYNC_CART_CONTENTS,
           basket: result.data.map(x => x.id),
@@ -97,7 +99,7 @@ export const syncCartContents = (productIds = null) => {
       });
     }
 
-    return axios.post('http://localhost:8000/api/basket', { token: USER_TOKEN }).then(result => {
+    return axios.post(`${API_URL}/basket`, { token: USER_TOKEN }).then(result => {
       dispatch({
         type: SYNC_CART_CONTENTS,
         basket: result.data.map(x => x.id),
@@ -122,7 +124,7 @@ export const addToCart = productId => {
     })
 
     if (USER_TOKEN) {
-      return axios.post('http://localhost:8000/api/basket/add', { token: USER_TOKEN, productId });
+      return axios.post(`${API_URL}/basket/add`, { token: USER_TOKEN, productId });
     }
   }
 }
@@ -141,14 +143,14 @@ export const removeFromCart = productId => {
     })
 
     if (USER_TOKEN) {
-      return axios.post('http://localhost:8000/api/basket/remove', { token: USER_TOKEN, productId });
+      return axios.post(`${API_URL}/basket/remove`, { token: USER_TOKEN, productId });
     }
 
     return {};
   }
 }
 
-export const checkout = (productIds, email) => {
+export const checkout = (productIds, email, addressDetails) => {
   return dispatch => {
     dispatch({
       type: CHECKOUT_REQUEST
@@ -156,16 +158,25 @@ export const checkout = (productIds, email) => {
 
     const USER_TOKEN = localStorage.getItem('USER_TOKEN');
     if (USER_TOKEN) {
-      return axios.post('http://localhost:8000/api/checkout', { token: USER_TOKEN }).then(result => {
+      return axios.post(`${API_URL}/checkout`, { token: USER_TOKEN, addressDetails }).then(result => {
         dispatch({
           type: CHECKOUT,
         })
+        dispatch({
+          type: CHECK_AUTH_SUCCESS,
+          user: result.data.user,
+        });
       });
     } else {
-      return axios.post('http://localhost:8000/api/checkout', { basket: productIds, email }).then(result => {
+      return axios.post(`${API_URL}/checkout`, { basket: productIds, email }).then(result => {
         dispatch({
           type: CHECKOUT,
         })
+        
+        dispatch({
+          type: CHECK_AUTH_SUCCESS,
+          user: result.data.user,
+        });
       });
     }
   }

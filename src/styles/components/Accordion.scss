@@ -1,0 +1,37 @@
+.accordion {
+    width: 100%;
+    header {
+        width: 100%;
+        background: #F2F2F2;
+        border: 1px solid #CCCCCC;
+        border-radius: 6px;
+        padding: 16px;
+        position: relative;
+
+        .header-inner {
+            display: flex;
+            .header-block {
+                margin-right: 64px;
+                div {
+                    width: 100%;
+                }
+
+                div:first-child {
+                    font-family: 'Lora';
+                }
+            }
+        }
+    }
+
+    main {
+        border: 1px solid #CCCCCC;
+        border-top: none;
+        position: relative;
+        top: -6px;
+        padding: 32px;
+        border-radius: 6px;
+        margin-bottom: 24px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+}

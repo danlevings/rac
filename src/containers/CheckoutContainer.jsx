@@ -49,12 +49,17 @@ class CheckoutContainer extends Component {
     }
 
     confirmPayment = () => {
-        this.props.checkout(this.props.basket, this.state.email);
+        const { email, address, postcode, city, country } = this.state;
+        this.props.checkout(this.props.basket, this.state.email, { address, postcode, city, country });
         this.props.history.push('/thanks');
     }
   render() {
     const { products, basket, auth } = this.props;
     const { firstName, lastName, email, address, postcode, city, country } = this.state;
+    
+    const shippingPrice = basket.reduce((a, b) => a + products[b].shippingPrice, 0);
+    const totalPrice = basket.reduce((a, b) => a + products[b].price, shippingPrice);
+
     return (
       <div className="checkout-page">
         <NavBar />
@@ -149,10 +154,10 @@ class CheckoutContainer extends Component {
                             ))}
                             <tr className="delivery">
                                 <td>
-                                    <span>Delivery Charge</span>
+                                    <span>Shipping Charge</span>
                                 </td>
                                 <td className="price">
-                                    <span>${this.state.deliveryPrice}</span>
+                                    <span>${shippingPrice}</span>
                                 </td>
                             </tr>
                             <tr className="total">
@@ -160,7 +165,7 @@ class CheckoutContainer extends Component {
                                     <span>Total</span>
                                 </td>
                                 <td className="price">
-                                    <span>${basket.reduce((a, b) => a + products[b].price, this.state.deliveryPrice)}</span>
+                                    <span>${totalPrice}</span>
                                 </td>
                             </tr>
                         </table>
