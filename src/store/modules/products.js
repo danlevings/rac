@@ -1,3 +1,4 @@
+import axios from 'axios';
 import fireplace1 from '../../assets/fireplace-1.png';
 import fireplace2 from '../../assets/fireplace-2.png';
 import fireplace3 from '../../assets/fireplace-3.png';
@@ -101,12 +102,24 @@ export const getProducts = () => {
     dispatch({
       type: GET_PRODUCTS_REQUEST
     })
+    return axios.get('http://localhost:8000/api/products').then(result => {
+      console.log(result.data);
+      const products = result.data.map(p => ({
+        description: p.description,
+        id: p.id,
+        name: p.name,
+        price: p.price,
+        images: p.product_images.map(pi => `http://localhost:8000/images/${pi.image}`),
+        tags: p.tags.map(t => ({
+          name: t.name,
+          type: t.type,
+        }))
+      }))
 
-    return setTimeout(() => {
       dispatch({
         type: GET_PRODUCTS,
-        products: dummyProducts,
+        products: products,
       })
-    }, 500)
+    });
   }
 }

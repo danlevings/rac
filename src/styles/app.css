@@ -377,7 +377,7 @@ input[type=checkbox] {
       font-size: 18px;
       float: right; }
 
-input[type=text], textarea {
+input[type=text], textarea, input[type=password], input[type=email] {
   border-radius: 4px;
   border: 1px solid #00A483;
   padding: 8px 16px; }
@@ -483,7 +483,7 @@ input[type=text], textarea {
   .checkout-page .checkout-summary .delivery {
     border-top: 1px solid #1A1A1A; }
 
-.product-modal {
+.product-modal, .login-modal {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -496,29 +496,41 @@ input[type=text], textarea {
   padding: 12px 24px;
   width: 700px;
   z-index: 100; }
-  .product-modal h2 {
+  .product-modal h2, .login-modal h2 {
     width: 100%;
     font-weight: normal;
     font-family: "Lora", serif; }
-  .product-modal span {
+  .product-modal span, .login-modal span {
     display: block;
     width: 100%;
     padding-bottom: 16px; }
-  .product-modal .left {
+  .product-modal .left, .login-modal .left {
     width: 50%;
     max-width: 200px;
     padding-right: 32px; }
-  .product-modal .right {
+  .product-modal .right, .login-modal .right {
     width: 50%;
     flex-grow: 1;
     padding-bottom: 32px; }
-  .product-modal .cross {
+  .product-modal .cross, .login-modal .cross {
     position: absolute;
     top: 12px;
     right: 24px;
     font-family: "Lora", serif;
     font-size: 32px;
     opacity: .6; }
+
+.login-modal input {
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 16px; }
+
+.login-modal .form-footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between; }
+  .login-modal .form-footer span {
+    display: inline-block; }
 
 .underlay {
   width: 100vw;
@@ -528,3 +540,11 @@ input[type=text], textarea {
   left: 0;
   background: rgba(0, 0, 0, 0.4);
   z-index: 99; }
+
+.error-box {
+  background: #e74c3c;
+  color: white;
+  padding: 16px;
+  width: 100%;
+  margin-top: 16px;
+  text-align: center; }

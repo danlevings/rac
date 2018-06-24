@@ -33,9 +33,9 @@ import { bindActionCreators } from 'redux'
           {this.props.productIds.map(id => 
             <Product
               key={id}
-              image={products[id].image}
+              image={products[id].images[0]}
               tag={products[id].tag}
-              title={products[id].title}
+              title={products[id].name}
               price={products[id].price}
               onAddToCart={() => this.onAddToCart(id)}
               onRemoveFromCart={() => this.onRemoveFromCart(id)}

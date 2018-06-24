@@ -305,10 +305,10 @@ input[type=checkbox] {
     }
 }
 
-input[type=text], textarea {
-border-radius: 4px;
-border: 1px solid $secondary;
-padding: 8px 16px;
+input[type=text], textarea, input[type=password], input[type=email] {
+    border-radius: 4px;
+    border: 1px solid $secondary;
+    padding: 8px 16px;
 }
 
 .map {
@@ -457,7 +457,7 @@ padding: 8px 16px;
     }
 }
 
-.product-modal {
+.product-modal, .login-modal {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -503,6 +503,23 @@ padding: 8px 16px;
     }
 }
 
+.login-modal {
+    input {
+        width: 100%;
+        padding: 12px 16px;
+        margin-bottom: 16px;
+    }
+
+    .form-footer {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        span {
+            display: inline-block;
+        }
+    }
+}
+
 .underlay {
     width: 100vw;
     height: 100vh;
@@ -511,4 +528,13 @@ padding: 8px 16px;
     left: 0;
     background: rgba(0, 0, 0, .4);
     z-index: 99;
+}
+
+.error-box {
+    background: #e74c3c;
+    color: white;
+    padding: 16px;
+    width: 100%;
+    margin-top: 16px;
+    text-align: center;
 }

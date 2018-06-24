@@ -30,7 +30,7 @@ export default class TopBar extends Component {
                     <h2>The Reproduction Antiques Company</h2>
                     <p>A fictitious manifacturing company that makes reproduction goods to order for both the home market and the overseas market</p>
                     <br />
-                    <a className="button">Start shopping</a>
+                    <Link to="/shop" className="button" >Start shopping</Link>
                 </div>
             </div>
         </div>

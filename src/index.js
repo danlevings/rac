@@ -15,7 +15,6 @@ import store from './store'
 import routes from './routes';
 
 ReactDOM.render(
-    
     <Provider store={store}>
         <BrowserRouter>
             <div className="rac">

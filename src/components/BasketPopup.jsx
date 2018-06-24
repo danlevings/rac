@@ -10,7 +10,10 @@ import { bindActionCreators } from 'redux'
 
 class BasketPopup extends Component {
 
-
+    
+  removeFromCart = id => {
+    this.props.removeFromCart(id);
+  }
 
   render() {
     const { basket, products } = this.props;
@@ -26,11 +29,11 @@ class BasketPopup extends Component {
                 {basket.map(id => (
                     <tr className="basket-item">
                         <td>
-                            <img src={products[id].image} alt={products[id].title} />
+                            <img src={products[id].images[0]} alt={products[id].name} />
                         </td>
                         <td className="basket-title">
-                            <span>{products[id].title}</span> <br />
-                            <a href="">Remove</a>
+                            <span>{products[id].name}</span> <br />
+                            <a onClick={() => this.removeFromCart(id)}>Remove</a>
                         </td>
                         <td>
                             <span>${products[id].price}</span>

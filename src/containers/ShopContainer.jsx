@@ -27,6 +27,17 @@ class ShopContainer extends Component {
     this.props.removeFromCart(productId);
   }
 
+  displayTag = product => {
+    const { products, productIds } = this.props;
+    if (products[product].tags.length > 0) {
+      const tag = products[product].tags.find(x => x.type === "misc");
+      if (tag) {
+        return tag.name;
+      }
+    }
+    return '';
+  }
+
   render() {
     const { products, productIds } = this.props;
     return (
@@ -41,16 +52,15 @@ class ShopContainer extends Component {
           {this.props.productIds.map(product => 
             <Product
               key={products[product].id}
-              image={products[product].image}
+              image={products[product].images[0]}
               tag={products[product].tag}
-              title={products[product].title}
+              title={products[product].name}
               price={products[product].price}
+              tag={this.displayTag(product)}
               onAddToCart={() => this.onAddToCart(products[product].id)}
               onRemoveFromCart={() => this.onRemoveFromCart(products[product].id)}
             /> )}
           </div>
-
-          <SingleProductModal />
       </div>
     )
   }

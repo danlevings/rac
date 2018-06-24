@@ -18,6 +18,9 @@ export default class Product extends Component {
   }
 
   onProductClick = () => {
+    if (!this.props.onAddToCart) {
+      return false;
+    }
     this.setState({
       isProductModalOpen: true
     });
@@ -60,7 +63,7 @@ export default class Product extends Component {
   }
 
   render() {
-    const { style, image, tag, title, price, description, onAddToCart } = this.props;
+    const { style, image, tag, title, price, description, shipping, onAddToCart } = this.props;
     const { isProductModalOpen, hasBeenAdded } = this.state;
     return [
       <div key={title} className={`product`} style={{...style, cursor: 'pointer'}} onClick={this.onProductClick}>
@@ -77,7 +80,7 @@ export default class Product extends Component {
       isProductModalOpen && <div className="underlay" />,
       isProductModalOpen && (<div className="product-modal">
           <h2>{title}</h2>
-          <span className="product-price">${price}</span>
+          <span className="product-price">${price} {shipping && `(+${shipping} shipping)`}</span>
           <div className="left">
             <div className="product-image">
                 <img src={image} alt={title}/>
