@@ -1,7 +1,5 @@
 import React from 'react'
 
-let sent = false;
-
 export default ({sent, onClick}) => {
   return (
     <div className="contact-grid">
