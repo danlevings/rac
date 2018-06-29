@@ -65,8 +65,8 @@ export default class Product extends Component {
   }
 
   render() {
-    const { style, image, tag, title, price, description, shippingPrice, onAddToCart } = this.props;
-    const { isProductModalOpen, hasBeenAdded } = this.state;
+    const { style, image, tag, title, price, description, shippingPrice } = this.props;
+    const { isProductModalOpen } = this.state;
     return [
       <div key={title} className={`product`} style={{...style, cursor: 'pointer'}} onClick={this.onProductClick}>
           <div className="product-image">
@@ -79,7 +79,7 @@ export default class Product extends Component {
           }
           {this.renderButton()}
       </div>,
-      isProductModalOpen && <div className="underlay" />,
+      isProductModalOpen && <div className="underlay" onClick={this.onCloseModal} />,
       isProductModalOpen && (<div className="product-modal">
           <h2>{title}</h2>
         <span className="product-price">${price} {shippingPrice !== 0 && <span style={{ fontSize: 12, opacity: 0.8 }}>(+${shippingPrice} shipping)</span>}</span>

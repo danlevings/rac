@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { ToastContainer } from "react-toastr";
 
 import { connect } from 'react-redux'
@@ -51,7 +50,7 @@ class LoginRegisterModal extends Component {
               <input type="text" placeholder="First name" ref={ref => this.firstNameField = ref} />
               <input type="text" placeholder="Last name" ref={ref => this.lastNameField = ref} />
               <input type="email" placeholder="Email" ref={ref => this.emailField = ref} />
-              <input type="password" placeholder="Password" ref={ref => this.passwordField = ref} />
+              <input type="password" placeholder="Password" ref={ref => this.passwordField = ref} onKeyPress={e => e.key === 'Enter' ? this.onRegister() : null} />
               <div className="form-footer">
                   <span onClick={() => { this.setState({ registering: false }) }}>or click here to login</span>
                   <button className="button" onClick={() => { this.onRegister() }}>Register</button>
@@ -65,7 +64,7 @@ class LoginRegisterModal extends Component {
               
               <h2>Login</h2>
               <input type="email" placeholder="Email" ref={ref => this.loginEmailField = ref} />
-              <input type="password" placeholder="Password" ref={ref => this.loginPasswordField = ref} />
+              <input type="password" placeholder="Password" ref={ref => this.loginPasswordField = ref} onKeyPress={e => e.key === 'Enter' ? this.onLogin() : null} />
               <div className="form-footer">
                   <span onClick={() => { this.setState({ registering: true }) }}>or click here to register</span>
                   <button className="button" onClick={() => { this.onLogin() }} disabled={isLoggingIn}>{isLoggingIn ? 'Logging in...' : 'Login'}</button>

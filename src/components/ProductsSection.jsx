@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import Product from './Product';
 
 import { connect } from 'react-redux'
@@ -27,12 +26,14 @@ import { bindActionCreators } from 'redux'
   render() {
     const { products, productIds } = this.props; 
     return (
-      <section className='wrapper' style={{ textAlign: 'center', padding: 42 }}>
-        <h3>A Collection of Products</h3>
+      <section className='wrapper' style={{ padding: 42 }}>
+        <h3 style={{ textAlign: 'center' }}>A Collection of Products</h3>
         <div className="products" style={{ 
             display: 'flex',
-            flexWrap: 'wrap', }} >
-          {this.props.productIds.slice(0, 4).map(id => 
+            flexWrap: 'wrap', 
+            
+          }} >
+          {productIds.slice(0, 4).map(id => 
             <Product
               key={id}
               image={products[id].images[0]}

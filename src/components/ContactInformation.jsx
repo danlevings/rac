@@ -1,6 +1,8 @@
 import React from 'react'
 
-export default () => {
+let sent = false;
+
+export default ({sent, onClick}) => {
   return (
     <div className="contact-grid">
         <div className="contact-info">
@@ -52,13 +54,14 @@ export default () => {
             </div>
             </div>
         </div>
+        {!sent ? 
         <div className="contact-form">
             <input type="text" placeholder="Name" />
             <input type="text" placeholder="Email" />
             <input type="text" placeholder="Phone" />
             <textarea placeholder="Message"></textarea>
-            <button>Send</button>
-        </div>
+            <button style={{ cursor: 'pointer' }} onClick={onClick}>Send</button>
+        </div> : <div className="contact-form">Thanks for sending your message! You'll eventually get a reply</div>}
     </div>
   )
 }

@@ -1,14 +1,10 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import NavBar from '../components/NavBar';
 import Breadcrumbs from '../components/Breadcrumbs';
 import Product from '../components/Product';
-import Filters from '../components/Filters';
-import SingleProductModal from '../components/SingleProductModal';
 import Accordion from '../components/Accordion';
 
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 
 class OrdersContainer extends Component {
 
@@ -35,7 +31,7 @@ class OrdersContainer extends Component {
         <div className="wrapper">
           <h2>Your Orders</h2>
           
-            {user.orders && user.orders.map(order => 
+            {user.orders && user.orders.reverse().map(order => 
               <Accordion 
                 headerContent={
                   <div className="header-inner">

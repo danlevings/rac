@@ -35,7 +35,10 @@
         text-align: center;
 
         .center {
-            margin: auto;
+            margin: auto;        
+            @media screen and (max-width: 720px) {
+                padding: 0 20px;
+            }
         }
         h2, p, a {
             margin: auto;
@@ -52,6 +55,9 @@
             opacity: .7;
             line-height: 1.75;
             width: 600px;
+            @media screen and (max-width: 720px) {
+                width: 100%;
+            }
         }
 
         .button {
@@ -64,7 +70,11 @@
         height: 100px;
         padding: 16px 60px;
         display: flex;
-        justify-content: space-between;   
+        justify-content: space-between;  
+
+        @media screen and (max-width: 380px) {
+            padding: 16px 20px;
+        }
         h1 {
             margin: 0;
             padding: 0;
@@ -94,8 +104,57 @@
                 &.active, &:hover {
                     opacity: 1;
                 } 
+
+                
             }
+            @media screen and (max-width: 720px) {
+                display: none;
+            }
+            
         }
     }
+}
 
+.responsive-navicon {
+    display: none;
+    cursor: pointer;
+    font-size: 28px;
+    @media screen and (max-width: 720px) {
+        display: flex;
+        i {
+            margin: auto;
+        }
+    }
+}
+.res-nav {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: fixed;
+    z-index: 999999;
+    background: rgba(255, 255, 255, .8);
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    
+    a {
+        display: inline-block;
+        margin: 32px auto;
+        font-size: 21px;
+        font-weight: bold;
+        color: $dark;
+        font-family: $fontPrimary;
+    }
+
+    i {
+        color: $dark;
+        cursor: pointer;
+        font-size: 21px;
+        position: absolute;
+        top: 64px;
+        right: 64px;
+    }
 }

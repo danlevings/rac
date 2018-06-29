@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 
 import { connect } from 'react-redux'
@@ -15,6 +13,7 @@ class CheckoutContainer extends Component {
         firstName: '',
         lastName: '',
         email: '',
+        error: '',
     }
 
     componentWillMount = () => {
@@ -49,13 +48,32 @@ class CheckoutContainer extends Component {
     }
 
     confirmPayment = () => {
-        const { email, address, postcode, city, country } = this.state;
-        this.props.checkout(this.props.basket, this.state.email, { address, postcode, city, country });
+        const { firstName, lastName, email, address, postcode, city, country, creditCardNumber, expirationDate, ccv } = this.state;
+        if (!(firstName, lastName, email)) {
+            this.setState({
+                error: 'Please fill out your first name, last name and email in step 1',
+            })
+            return;
+        }
+        if (!(address && postcode && city && country)) {
+            this.setState({
+                error: 'Please fill out your address, country, city and postcode in step 2',
+            })
+            return;
+        }
+
+        if (!(creditCardNumber && expirationDate && ccv)) {
+            this.setState({
+                error: 'Please fill out your payment details in step 3',
+            })
+            return;
+        }
+        this.props.checkout(this.props.basket, email, { address, postcode, city, country });
         this.props.history.push('/thanks');
     }
   render() {
     const { products, basket, auth } = this.props;
-    const { firstName, lastName, email, address, postcode, city, country } = this.state;
+    const { firstName, lastName, email, address, postcode, city, country, creditCardNumber, expirationDate, ccv, error } = this.state;
     
     const shippingPrice = basket.reduce((a, b) => a + products[b].shippingPrice, 0);
     const totalPrice = basket.reduce((a, b) => a + products[b].price, shippingPrice);
@@ -127,15 +145,15 @@ class CheckoutContainer extends Component {
                     </div>]}
                     <div className="form-group">
                         <label>Credit card number</label>
-                        <input type="text" placeholder="0000 - 0000 - 0000 - 0000" />
+                        <input type="text" placeholder="0000 - 0000 - 0000 - 0000" value={creditCardNumber} name="creditCardNumber" onChange={this.onChange} />
                     </div>
                     <div className="form-group half">
                         <label>Expiration date</label>
-                        <input type="text" placeholder="MM/YY" style={{ marginRight: 16 }} />
+                        <input type="text" placeholder="MM/YY" style={{ marginRight: 16 }} value={expirationDate} name="expirationDate" onChange={this.onChange} />
                     </div>
                     <div className="form-group half">
                         <label>Security code</label>
-                        <input type="text" placeholder="CCV" />
+                        <input type="text" placeholder="CCV" value={ccv} name="ccv" onChange={this.onChange} />
                     </div>
                 </div>
                 <div className="checkout-summary">
@@ -175,6 +193,7 @@ class CheckoutContainer extends Component {
                         means you agree to this Subscription Document and 
                         these Terms and Conditions.</p>
                     <button className="button" style={{ width: '100%' }} onClick={this.confirmPayment}>Confirm payment</button>
+                    {error && <div className="error-box">{error}</div>}
                 </div>
             </div>
         </div>

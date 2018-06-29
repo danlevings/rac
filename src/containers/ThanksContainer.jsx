@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import NavBar from '../components/NavBar';
-import ProductsSection from '../components/ProductsSection';
 import ImageSection from '../components/ImageSection';
 import ServicesSection from '../components/ServicesSection';
 
 export default class HomeContainer extends Component {
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
   render() {
     return (
       <div className="home-page">

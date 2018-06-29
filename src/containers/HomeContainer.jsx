@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import Hero from '../components/Hero';
 import ProductsSection from '../components/ProductsSection';
 import ImageSection from '../components/ImageSection';

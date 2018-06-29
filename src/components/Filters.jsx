@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import Button from './Button';
 
 export default class Filters extends Component {
 
     state = {
         categories: [],
         tags: [],
+        isOpen: false,
     }
 
     componentDidMount = () => {
@@ -70,9 +71,15 @@ export default class Filters extends Component {
 
     }
 
+    toggleOpen = () => {
+        this.setState({
+            isOpen: !this.state.isOpen,
+        })
+    }
+
     render() {
         return (
-        <div>
+        <div className={`shop-filters ${this.state.isOpen && 'open'}`}>
             <h4>Categories</h4> 
             {this.state.categories.map(c => (
                 <div className='filter-checkbox' key={c.name}>
@@ -87,6 +94,8 @@ export default class Filters extends Component {
                     <label htmlFor={c.name}>{c.name}</label>
                 </div>
             ))}
+            {this.state.isOpen && <Button onClick={this.toggleOpen} text="Done">Done</Button>}
+            <div className="responsive-icon" onClick={this.toggleOpen}>Filters</div>
         </div>
         )
     }

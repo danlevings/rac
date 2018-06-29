@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import Button from '../components/Button';
-import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux'
 import { getProducts } from '../store/modules/products'
@@ -9,7 +7,6 @@ import { addToCart, removeFromCart } from '../store/modules/basket'
 import { bindActionCreators } from 'redux'
 
 class BasketPopup extends Component {
-
     
   removeFromCart = id => {
     this.props.removeFromCart(id);
@@ -20,7 +17,7 @@ class BasketPopup extends Component {
     if (!this.props.isOpen) {
         return false;
     }
-    return (
+    return [
       <div className="basket-popup">
         <h3>Your basket</h3>
         {this.props.basket.length <= 0 ? (<p>Your basket is currently empty</p>) : 
@@ -49,8 +46,9 @@ class BasketPopup extends Component {
             <Button text='Checkout' onClick={this.props.onCheckoutClick}/>
         </div>)
         }
-      </div>
-    )
+      </div>,
+      <div style={{ width: '100vw', height: '100vh', top: 0, left: 0, position: 'fixed',}} onClick={this.props.onClose} />
+    ]
   }
 }
 

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_URL } from './utils';
-import { MERGE_CART_CONTENTS } from './basket';
+import { MERGE_CART_CONTENTS, SYNC_CART_CONTENTS } from './basket';
 
 export const LOGIN_REQUEST = 'auth/REQUEST_LOGIN';
 export const LOGIN_SUCCESS = 'auth/LOGIN_SUCCESS';
@@ -184,6 +184,10 @@ export const logout = () => {
     dispatch({
       type: LOGOUT,
     });
+    dispatch({
+      type: SYNC_CART_CONTENTS,
+      basket: [],
+    })
     return axios.post(`${API_URL}/logout`, { token: USER_TOKEN });
   }
 }

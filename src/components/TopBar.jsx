@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-
 import BasketPopup from './BasketPopup';
 import LoginRegisterModal from './LoginRegisterModal';
 import { withRouter, Link } from "react-router-dom";
@@ -56,30 +54,36 @@ class TopBar extends Component {
     })
   }
 
+  onBasketClose = () => {
+    console.log('pls close');
+    this.setState({
+      isBasketOpen: false,
+    })
+  }
+
   renderLoginText = () => {
     if (this.props.authorized) {
       return <li className="topbar-dropdown-hover">
-        <div>Welcome, <span style={{ textTransform: 'capitalize' }}>{this.props.user.firstName}</span>! <i className="fa fa-user" /></div>
+        <div>Welcome, <span style={{ textTransform: 'capitalize' }}>{this.props.user.firstName}</span>!&nbsp;&nbsp; <i className="fa fa-user" /></div>
         <div className="topbar-dropdown">
           <Link to="/orders">Your orders</Link>
           <span onClick={this.toggleLoginRegister}>Logout</span>
         </div>
       </li>
     }
-    return <li onClick={this.toggleLoginRegister}>Sign in or register <i className="fa fa-user" /></li>
+    return <li onClick={this.toggleLoginRegister}>Sign in or register &nbsp;&nbsp; <i className="fa fa-user" /></li>
   }
 
   render() {
-    const { authorized, user } = this.props;
     return (
       <div className="top-bar">
         <ul>
             {this.renderLoginText()}
             <li>EN</li>
-            <li onClick={this.toggleBasket}><i className="fa fa-shopping-cart"></i> ({this.props.basket.length})</li>
+            <li onClick={this.toggleBasket}><i className="fa fa-shopping-cart"></i> {this.props.basket.length > 0 && <div className="basket-amount">{this.props.basket.length}</div>}</li>
         </ul>
 
-        <BasketPopup isOpen={this.state.isBasketOpen} onCheckoutClick={this.onCheckoutClick} />
+        <BasketPopup isOpen={this.state.isBasketOpen} onCheckoutClick={this.onCheckoutClick} onClose={this.onBasketClose} />
         <LoginRegisterModal isOpen={this.state.isLoginRegisterModalOpen} onClose={this.closeLoginRegister}/>
       </div>
     )

@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 
-import HeroImage from '../assets/stoxel-42.jpg';
+import ResponsiveNav from './ResponsiveNav';
 
 export default class TopBar extends Component {
 
@@ -18,6 +17,7 @@ export default class TopBar extends Component {
                 <li><Link to="/shop">Shop</Link></li>
                 <li><Link to="/contact">Contact</Link></li>
             </ul>
+            <ResponsiveNav />
         </nav>
     )
   }
